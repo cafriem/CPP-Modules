@@ -6,29 +6,28 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:39:45 by cafriem           #+#    #+#             */
-/*   Updated: 2023/09/04 12:20:53 by cafriem          ###   ########.fr       */
+/*   Updated: 2023/12/27 11:22:21 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONE_BOOK
-# define PHONE_BOOK
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
-class	Phonebook {
-	
-	pubic:
+#include "contact.hpp"
 
-		Contact person[8];
-		Add(void);
-};
+class	Phonebook
+{
+	private:
+		Contact	contacts[8];
+		int		index;
+	public:
+		Phonebook();
+		~Phonebook();
 
-class	Contact {
-
-	pubic:
-		string	FirstName[];
-		string	LastName[];
-		int		PhoneNumber;
-		string	DarkSecret[];
-
+		void	menu();
+		void	addcontact();
+		void	book();
+		void	searchcontact();
 };
 
 #endif
