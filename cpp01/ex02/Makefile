@@ -4,7 +4,7 @@ CC = c++
 
 FLAGS = -std=c++98 -Wall -Werror -Wextra
 
-SRCS = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+SRCS = main.cpp
 
 OBJS = $(SRCS:.c=.o)
 
@@ -14,7 +14,7 @@ all: $(NAME)
 	$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) -o $@
 
 clean:
 	rm -f $(OBJS)
