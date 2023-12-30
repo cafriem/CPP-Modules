@@ -1,8 +1,8 @@
 NAME = Zombie
 
-CC = c++
+CXX = c++
 
-FLAGS = -std=c++98 -Wall -Werror -Wextra
+CXXFLAGS = -std=c++98 -Wall -Werror -Wextra
 
 SRCS = main.cpp
 
@@ -11,10 +11,10 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 %.o : %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(FLAGS) $(SRCS) -o $@
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
 
 clean:
 	rm -f $(OBJS)

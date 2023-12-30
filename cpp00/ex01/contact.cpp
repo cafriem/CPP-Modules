@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:02:21 by cafriem           #+#    #+#             */
-/*   Updated: 2023/12/27 11:21:29 by cafriem          ###   ########.fr       */
+/*   Updated: 2023/12/27 15:30:06 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	Contact::setname(std::string text, int flag)
 		if (!isalpha(text[c]))
 			return(1);
 	}
-	if (text.length() > 10)
-	{
-		text[9] = '.';
-		text.erase(10, text.length() - 10);
-	}
+	// if (text.length() > 10)
+	// {
+		// text[9] = '.';
+		// text.erase(10, text.length() - 10);
+	// }
 	if (flag == 1)
 		this->firstname = text;
 	if (flag == 2)
@@ -66,11 +66,11 @@ int Contact::phonenum(std::string num)
 		if (!isdigit(num[c]))
 			return(1);
 	}
-	if (num.size() > 10)
-	{
-		num[9] = '.';
-		num.erase(10, num.size() - 10);
-	}
+	// if (num.size() > 10)
+	// {
+	// 	num[9] = '.';
+	// 	num.erase(10, num.size() - 10);
+	// }
 	this->phonenumber = num;
 	return(0);
 }	
@@ -79,11 +79,11 @@ int Contact::secret(std::string text)
 {
 	if (text == "")
 		return(1);
-	if (text.length() > 10)
-	{
-		text[9] = '.';
-		text.erase(10, text.length() - 10);
-	}
+	// if (text.length() > 10)
+	// {
+	// 	text[9] = '.';
+	// 	text.erase(10, text.length() - 10);
+	// }
 	this->darksecret = text;
 	return(0);
 }
