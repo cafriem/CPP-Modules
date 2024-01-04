@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2023/12/29 07:43:41 by cafriem          ###   ########.fr       */
+/*   Created: 2023/09/01 09:02:23 by cafriem           #+#    #+#             */
+/*   Updated: 2024/01/03 19:07:05 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon &type) : _weapon(type)
+HumanA::HumanA(std::string name, Weapon &type): _weapon(type)
 {
 	this->_name = name;
 }
@@ -22,5 +22,5 @@ HumanA::~HumanA()
 
 void	HumanA::attack()
 {
-	std::cout << _name << " attacks with their " << this->_weapon.getType() << std::endl;
+	std::cout << this->_name << " attacks with "<< this->_weapon.getType() << std::endl;
 }

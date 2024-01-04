@@ -2,7 +2,7 @@ NAME = sed
 
 CXX = c++
 
-CXXFLAGS = main.cpp
+CXXFLAGS = -std=c++98 -Wall -Werror -Wextra
 
 SRCS = main.cpp
 
@@ -14,7 +14,7 @@ all: $(NAME)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

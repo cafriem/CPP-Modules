@@ -14,7 +14,7 @@ all: $(NAME)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

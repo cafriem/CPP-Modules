@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2023/12/30 02:42:54 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/03 18:28:49 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	openfile(char **argv)
 
 int main(int argc, char **argv)
 {
-	if (argc = 4 && argv[2][0] != '\0')
+	if (argc == 4 && argv[2][0] != '\0')
 		openfile(argv);
 	else
 		std::cout << "Arguements are wrong" << std::endl;
