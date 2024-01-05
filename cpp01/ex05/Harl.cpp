@@ -6,11 +6,16 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/05 06:57:00 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/05 06:59:50 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "harl.hpp"
+#include "Harl.hpp"
+Harl::Harl()
+{}
+
+Harl::~Harl()
+{}
 
 void	Harl::debug()
 {
