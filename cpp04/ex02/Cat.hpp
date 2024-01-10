@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                          :+:      :+:    :+:   */
+/*   FragTrap.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,25 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef	CAT_HPP
+# define CAT_HPP
 
-#include <iostream>
-#include <string>
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class	Animal
+class	Cat : public Animal
 {
+	private:
+	Brain	*_brain;
+
 	protected:
-		std::string	type;
+		std::string type;
 
 	public:
-		Animal();
-		Animal(Animal const &a);
-		Animal &operator=(Animal const &rhs);
-		~Animal();
+		Cat();
+		Cat(Cat const &a);
+		Cat	&operator=(Cat const &rhs);
+		~Cat();
 
 		void		makeSound() const;
-		std::string getType()const;
+		std::string	getType()const;
+		Brain		*getBrain()const;
 };
 
 #endif

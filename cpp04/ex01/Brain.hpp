@@ -10,24 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	WRONGCAT_HPP
-# define WRONGCAT_HPP
+#ifndef	BRAIN_HPP
+# define BRAIN_HPP
 
-#include "WrongAnimal.hpp"
+#include <iostream>
+#include <cstdlib>
+#include <string>
 
-class	WrongCat : public WrongAnimal
+class	Brain
 {
-	protected:
-		std::string type;
-
 	public:
-		WrongCat();
-		WrongCat(WrongCat const &a);
-		WrongCat	&operator=(WrongCat const &rhs);
-		~WrongCat();
+		std::string ideas[100];
 
-		void		makeSound() const;
-		std::string getType()const;
+		Brain();
+		Brain(Brain const &a);
+		Brain &operator=(Brain const &rhs);
+		~Brain();
+
+		void		getIdeas()const;
+		void		setIdeas(std::string *ideas);
+		std::string	*getIdeas();
+		void		changeIdeas();
 };
 
 #endif

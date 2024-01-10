@@ -10,24 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	WRONGANIMAL_HPP
-# define WRONGANIMAL_HPP
+#ifndef	DOG_HPP
+# define DOG_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
-class	Cat : public Animal
+class	Dog : public Animal
 {
+	private:
+	Brain	*_brain;
+
 	protected:
 		std::string type;
 
 	public:
-		Cat();
-		Cat(Cat const &a);
-		Cat	&operator=(Cat const &rhs);
-		~Cat();
+		Dog();
+		Dog(Dog const &a);
+		Dog	&operator=(Dog const &rhs);
+		~Dog();
 
 		void		makeSound() const;
-		std::string getType()const;
+		std::string	getType()const;
+		Brain		*getBrain()const;
 };
 
 #endif

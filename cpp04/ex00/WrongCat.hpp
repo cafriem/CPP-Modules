@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkhan <mkhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 15:28:53 by mkhan             #+#    #+#             */
-/*   Updated: 2023/01/29 20:04:55 by mkhan            ###   ########.fr       */
+/*   Created: 2023/09/01 11:05:51 by cafriem           #+#    #+#             */
+/*   Updated: 2024/01/08 03:46:40 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRONGCAT_HPP
-#define WRONGCAT_HPP
+# define WRONGCAT_HPP
 
 #include "WrongAnimal.hpp"
 
-class WrongCat: public WrongAnimal
+class	WrongCat : public WrongAnimal
 {
 	protected:
-		std::string _type;
-	
+		std::string type;
+
 	public:
 		WrongCat();
-		WrongCat(WrongCat const &object);
-		WrongCat &operator=(WrongCat const &rhs);
+		WrongCat(WrongCat const &a);
+		WrongCat	&operator=(WrongCat const &rhs);
 		~WrongCat();
 
-		void	makeSound() const;
-		std::string	getType() const;
+		void		makeSound() const;
+		std::string getType()const;
 };
 
 #endif

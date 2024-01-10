@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
+/*   FragTrap.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 11:05:51 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/10 10:34:04 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/08 03:46:40 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-# define WRONGANIMAL_HPP
+#ifndef	BRAIN_HPP
+# define BRAIN_HPP
 
 #include <iostream>
+#include <cstdlib>
 #include <string>
 
-class	WrongAnimal
+class	Brain
 {
-	protected:
-		std::string	type;
-
 	public:
-		WrongAnimal();
-		WrongAnimal(WrongAnimal const &a);
-		WrongAnimal	&operator=(WrongAnimal const &rhs);
-		~WrongAnimal();
+		std::string ideas[100];
 
-		void		makeSound() const;
-		std::string getType()const;
+		Brain();
+		Brain(Brain const &a);
+		Brain &operator=(Brain const &rhs);
+		~Brain();
+
+		void		getIdeas()const;
+		void		setIdeas(std::string *ideas);
+		std::string	*getIdeas();
+		void		changeIdeas();
 };
 
 #endif

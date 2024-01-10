@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   FragTrap.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkhan <mkhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 14:40:24 by mkhan             #+#    #+#             */
-/*   Updated: 2023/01/29 20:04:55 by mkhan            ###   ########.fr       */
+/*   Created: 2023/09/01 11:05:51 by cafriem           #+#    #+#             */
+/*   Updated: 2024/01/08 03:46:40 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-#define CAT_HPP
+#ifndef	CAT_HPP
+# define CAT_HPP
 
 #include "Animal.hpp"
 
-class Cat: public Animal
+class	Cat : public Animal
 {
 	protected:
-		std::string _type;
-	
+		std::string type;
+
 	public:
 		Cat();
-		Cat(Cat const &object);
-		Cat &operator=(Cat const &rhs);
+		Cat(Cat const &a);
+		Cat	&operator=(Cat const &rhs);
 		~Cat();
 
-		void	makeSound() const;
-		std::string	getType() const;
+		void		makeSound() const;
+		std::string getType()const;
 };
 
 #endif

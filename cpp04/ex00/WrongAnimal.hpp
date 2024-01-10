@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkhan <mkhan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 14:42:40 by mkhan             #+#    #+#             */
-/*   Updated: 2023/01/29 20:04:55 by mkhan            ###   ########.fr       */
+/*   Created: 2023/09/01 11:05:51 by cafriem           #+#    #+#             */
+/*   Updated: 2024/01/10 10:34:04 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRONGANIMAL_HPP
-#define WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 #include <iostream>
 #include <string>
 
-class WrongAnimal
+class	WrongAnimal
 {
 	protected:
-		std::string _type;
-		
+		std::string	type;
+
 	public:
 		WrongAnimal();
-		WrongAnimal(WrongAnimal const &object);
-		WrongAnimal &operator=(WrongAnimal const &rhs);
+		WrongAnimal(WrongAnimal const &a);
+		WrongAnimal	&operator=(WrongAnimal const &rhs);
 		~WrongAnimal();
 
-		void	makeSound() const;
-		std::string	getType() const;
+		void		makeSound() const;
+		std::string getType()const;
 };
 
 #endif
