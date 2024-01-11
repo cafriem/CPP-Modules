@@ -25,10 +25,10 @@ class	Animal
 		Animal();
 		Animal(Animal const &a);
 		Animal &operator=(Animal const &rhs);
-		virtual ~Animal();
+		virtual ~Animal() = 0;
 
 		virtual void	makeSound() const = 0;
-		std::string		getType()const;
+		virtual std::string		getType()const;
 };
 
 #endif

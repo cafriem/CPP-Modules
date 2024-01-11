@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/10 12:03:26 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 13:27:56 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ Brain::Brain()
 	std::cout << "Brain Constructor Called" << std::endl;
 	for (int i = 0; i < 100; i++)
 		this->ideas[i] = "Idea" + std::to_string(i);
-	
 }
 
 Brain::Brain(Brain const &a)

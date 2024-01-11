@@ -6,13 +6,13 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/10 12:04:24 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 13:14:45 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : _brain(new Brain()), type("Cat")
+Cat::Cat() : Animal("Cat"), _brain(new Brain()) 
 {
 	std::cout << "Cat Constructor Called" << std::endl;
 }
