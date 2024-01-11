@@ -23,6 +23,7 @@ class	Animal
 
 	public:
 		Animal();
+		Animal(std::string str);
 		Animal(Animal const &a);
 		Animal &operator=(Animal const &rhs);
 		virtual ~Animal() = 0;

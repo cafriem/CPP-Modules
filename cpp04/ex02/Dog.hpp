@@ -21,9 +21,6 @@ class	Dog : public Animal
 	private:
 	Brain	*_brain;
 
-	protected:
-		std::string type;
-
 	public:
 		Dog();
 		Dog(Dog const &a);

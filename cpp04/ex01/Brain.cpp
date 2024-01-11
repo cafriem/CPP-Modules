@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/11 13:27:56 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 13:51:25 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ Brain::~Brain()
 
 void	Brain::getIdeas() const
 {
+	std::cout << "Brain Copy Constructor Called" << std::endl;
 	for (int i = 0; i < 100; i++)
 		std::cout << this->ideas[i] << std::endl;
 }

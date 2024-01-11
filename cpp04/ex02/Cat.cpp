@@ -6,13 +6,13 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/10 12:04:24 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 13:53:49 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : _brain(new Brain()), type("Cat")
+Cat::Cat() : Animal("Cat"), _brain(new Brain()) 
 {
 	std::cout << "Cat Constructor Called" << std::endl;
 }
@@ -20,7 +20,12 @@ Cat::Cat() : _brain(new Brain()), type("Cat")
 Cat::Cat(Cat const &a): Animal(a)
 {
 	std::cout << "Cat Copy Constructor Called" << std::endl;
-	*this = a;
+	if (this != &a)
+	{
+		this->_brain = new Brain();
+		this->_brain->setIdeas(a._brain->getIdeas());
+		this->type = a.type;
+	}
 }
 
 Cat& Cat::operator=(Cat const &rhs)
