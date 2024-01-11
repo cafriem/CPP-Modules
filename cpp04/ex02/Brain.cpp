@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/11 13:51:45 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:33:12 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ Brain::Brain()
 {
 	std::cout << "Brain Constructor Called" << std::endl;
 	for (int i = 0; i < 100; i++)
-		this->ideas[i] = "Idea" + std::to_string(i);
-	
+		this->ideas[i] = "Ideas";
 }
 
 Brain::Brain(Brain const &a)
@@ -44,6 +43,7 @@ Brain::~Brain()
 
 void	Brain::getIdeas() const
 {
+	std::cout << "Brain Copy Constructor Called" << std::endl;
 	for (int i = 0; i < 100; i++)
 		std::cout << this->ideas[i] << std::endl;
 }

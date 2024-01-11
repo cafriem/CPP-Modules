@@ -6,26 +6,22 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/11 13:44:04 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:30:13 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-Dog::Dog() : Animal("Dog"), _brain(new Brain())
+Dog::Dog() : _brain(new Brain())
 {
 	std::cout << "Dog Constructor Called" << std::endl;
+	this->type = "Dog";
 }
 
 Dog::Dog(Dog const &a): Animal(a)
 {
 	std::cout << "Dog Copy Constructor Called" << std::endl;
-	if (this != &a)
-	{
-		this->_brain = new Brain();
-		this->_brain->setIdeas(a._brain->getIdeas());
-		this->type = a.type;
-	}
+	*this = a;
 }
 
 Dog& Dog::operator=(Dog const &rhs)

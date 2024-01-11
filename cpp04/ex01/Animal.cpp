@@ -6,18 +6,13 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/11 13:13:36 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:25:57 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
 Animal::Animal() : type("Animal")
-{
-	std::cout << "Animal Constructor Called" << std::endl;
-}
-
-Animal::Animal(std::string str) : type(str)
 {
 	std::cout << "Animal Constructor Called" << std::endl;
 }

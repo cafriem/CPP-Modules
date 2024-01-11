@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	ANIMAL_HPP
+#ifndef ANIMAL_HPP
 # define ANIMAL_HPP
 
 #include <iostream>
@@ -23,13 +23,12 @@ class	Animal
 
 	public:
 		Animal();
-		Animal(std::string str);
 		Animal(Animal const &a);
 		Animal &operator=(Animal const &rhs);
 		virtual ~Animal() = 0;
 
-		virtual void	makeSound() const = 0;
-		virtual std::string		getType()const;
+		virtual void		makeSound()const = 0;
+		virtual std::string	getType()const = 0;
 };
 
 #endif

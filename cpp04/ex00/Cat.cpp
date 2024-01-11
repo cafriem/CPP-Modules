@@ -6,18 +6,19 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/01/10 07:57:12 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:20:39 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : type("Cat")
+Cat::Cat()
 {
 	std::cout << "Cat Constructor Called" << std::endl;
+	this->type = "Cat";
 }
 
-Cat::Cat(Cat const &a)
+Cat::Cat(Cat const &a) : Animal(a)
 {
 	std::cout << "Cat Copy Constructor Called" << std::endl;
 	*this = a;
