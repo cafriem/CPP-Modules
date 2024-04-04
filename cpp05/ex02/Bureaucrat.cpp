@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/04/03 14:41:36 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/04 12:13:07 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,24 +92,24 @@ int	Bureaucrat::getGrade()const
 
 const char* Bureaucrat::gradeTooHighExpectation::what() const throw()
 {
-	return("Grade Too High");
+	return("Bureaucrat Grade Too High");
 }
 
 const char* Bureaucrat::gradeTooLowExpectation::what() const throw()
 {
-	return("Grade Too Low");
+	return("Bureaucrat Grade Too Low");
 }
 
 void	Bureaucrat::gradeIncreament()
 {
 	try
 	{
-		if (this->getGrade() > 150)
-			throw std::exception();
-		else if (this->getGrade() < 1)
-			throw std::exception();
+		if (this->getGrade() >= 150)
+			throw Bureaucrat::gradeTooLowExpectation();
+		else if (this->getGrade() <= 1)
+			throw Bureaucrat::gradeTooHighExpectation();
 		else
-			this->_grade++;
+			this->_grade--;
 	}
 	catch(const std::exception& e)
 	{
@@ -121,12 +121,12 @@ void	Bureaucrat::gradeDecreament()
 {
 	try
 	{
-		if (this->getGrade() > 150)
-			throw std::exception();
-		else if (this->getGrade() < 1)
-			throw std::exception();
+		if (this->getGrade() >= 150)
+			throw Bureaucrat::gradeTooLowExpectation();
+		else if (this->getGrade() <= 1)
+			throw Bureaucrat::gradeTooHighExpectation();
 		else
-			this->_grade--;
+			this->_grade++;
 	}
 	catch(const std::exception& e)
 	{
@@ -154,7 +154,7 @@ void	Bureaucrat::executeForm(AForm const &Aform)
 	try
 	{
 		Aform.execute(*this);
-		std::cout << _name << "executes" << Aform.getName() << std::endl;
+		std::cout << _name << " executes " << Aform.getName() << std::endl;
 	}
 	catch(const std::exception& e)
 	{

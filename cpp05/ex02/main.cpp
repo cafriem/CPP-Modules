@@ -27,7 +27,7 @@ int	main()
 	RobotomyRequestForm form2("target");
 	person2.signAForm(form2);
 	person2.executeForm(form2);
-	// std::cout << "--------------------------------------------------------------" << std::endl;
+	std::cout << "--------------------------------------------------------------" << std::endl;
 	Bureaucrat person3("Mike",3);
 	PresidentialPardonForm form3("target");
 	person3.signAForm(form3);

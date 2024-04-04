@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/03/24 19:36:35 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/04 11:57:46 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,12 @@ void	Bureaucrat::gradeIncreament()
 {
 	try
 	{
-		if (this->getGrade() > 150)
-			throw std::exception();
-		else if (this->getGrade() < 1)
-			throw std::exception();
+		if (this->getGrade() >= 150)
+			throw Bureaucrat::gradeTooLowExpectation();
+		else if (this->getGrade() <= 1)
+			throw Bureaucrat::gradeTooHighExpectation();
 		else
-			this->_grade++;
+			this->_grade--;
 	}
 	catch(const std::exception& e)
 	{
@@ -121,12 +121,12 @@ void	Bureaucrat::gradeDecreament()
 {
 	try
 	{
-		if (this->getGrade() > 150)
-			throw std::exception();
-		else if (this->getGrade() < 1)
-			throw std::exception();
+		if (this->getGrade() >= 150)
+			throw Bureaucrat::gradeTooLowExpectation();
+		else if (this->getGrade() <= 1)
+			throw Bureaucrat::gradeTooHighExpectation();
 		else
-			this->_grade--;
+			this->_grade++;
 	}
 	catch(const std::exception& e)
 	{

@@ -14,21 +14,23 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int	main()
 {
-	Bureaucrat B("john", 39);
-	ShrubberyCreationForm A("target");
-	B.signAForm(A);
-	B.executeForm(A);
+	Bureaucrat person1("Chris", 39);
+	ShrubberyCreationForm form1("target");
+	person1.signAForm(form1);
+	person1.executeForm(form1);
 	std::cout << "--------------------------------------------------------------" << std::endl;
-	Bureaucrat B("john", 19);
-	RobotomyRequestForm A("target");
-	B.signAForm(A);
-	B.executeForm(A);
+	Bureaucrat person2("John", 19);
+	RobotomyRequestForm form2("target");
+	person2.signAForm(form2);
+	person2.executeForm(form2);
 	std::cout << "--------------------------------------------------------------" << std::endl;
-	Bureaucrat B("john",3);
-	PresidentialPardonForm A("target");
-	B.signAForm(A);
-	B.executeForm(A);
+	Bureaucrat person3("Bob",3);
+	PresidentialPardonForm form3("target");
+	person3.signAForm(form3);
+	person3.executeForm(form3);
+	std::cout << "--------------------------------------------------------------" << std::endl;
 }

@@ -24,6 +24,7 @@ class	AForm
 		const int			_gradeSign;
 		const int			_gradeExecute;
 
+	protected:
 		class gradeTooLowExpectation : public std::exception
 		{
 			public:

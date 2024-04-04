@@ -14,35 +14,17 @@
 
 int	main()
 {
-	Bureaucrat bureaucrat1("Person1", 3);
-	Bureaucrat bureaucrat2("Person2", 75);
+	Bureaucrat bureaucrat1("Chris", 3);
+	Bureaucrat bureaucrat2("Bob", 75);
 	std::cout << bureaucrat1 << std::endl;
 	std::cout << bureaucrat2 << std::endl;
+
 	Form form1("Form1", 5, 10);
-	std::cout << "--------------------------------------------------------------" << std::endl;
 	std::cout << form1 << std::endl;
-	std::cout << "--------------------------------------------------------------" << std::endl;
-	try {
-		Form form2("Form1", 8996, 10);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << "--------------------------------------------------------------" << std::endl;
-	try {
-		bureaucrat1.signForm(form1);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
+	bureaucrat1.signForm(form1);
 	std::cout << form1 << std::endl;
-	std::cout << "--------------------------------------------------------------" << std::endl;
-	try {
-		bureaucrat2.signForm(form1);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
+	bureaucrat2.signForm(form1);
 	std::cout << form1 << std::endl;
-	return 0;
+
+	Form form2("Form2", 8996, 10);
 }

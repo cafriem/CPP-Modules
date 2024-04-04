@@ -15,12 +15,12 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-Intern::Intern():
+Intern::Intern()
 {
 	std::cout << "Intern Constructor Called" << std::endl;
 }
 
-Intern::Intern(Intern const &object):
+Intern::Intern(Intern const &object)
 {
 	std::cout << "Intern Copy Constructor Called" << std::endl;
 	*this = object;
