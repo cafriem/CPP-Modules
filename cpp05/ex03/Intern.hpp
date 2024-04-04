@@ -15,7 +15,7 @@
 
 #include "AForm.hpp"
 
-class	Intern : public AForm
+class	Intern
 {
 	public:
 		Intern();

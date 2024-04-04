@@ -16,21 +16,16 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Intern.hpp"
 
-int	main()
+int main()
 {
-	Bureaucrat person1("Chris", 39);
-	ShrubberyCreationForm form1("target");
-	person1.signAForm(form1);
-	person1.executeForm(form1);
-	std::cout << "--------------------------------------------------------------" << std::endl;
-	Bureaucrat person2("John", 19);
-	RobotomyRequestForm form2("target");
-	person2.signAForm(form2);
-	person2.executeForm(form2);
-	std::cout << "--------------------------------------------------------------" << std::endl;
-	Bureaucrat person3("Bob",3);
-	PresidentialPardonForm form3("target");
-	person3.signAForm(form3);
-	person3.executeForm(form3);
-	std::cout << "--------------------------------------------------------------" << std::endl;
+	std::string formName = "shrubbery creation"; 
+	std::string formTarget = "garbage";
+	Intern whocares;
+	Bureaucrat bureaucrat("John", 1);
+	AForm *f = whocares.makeForm(formName, formTarget);
+	std::cout << *f;
+	bureaucrat.signAForm(*f);
+	std::cout << (*f).getSigned() << std::endl;
+	bureaucrat.executeForm(*f);
+	delete f;
 }
