@@ -10,13 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
+#ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <fstream>
+#include "AForm.hpp"
 
+class	AForm;
 class	Bureaucrat
 {
 	private:
@@ -46,6 +49,8 @@ class	Bureaucrat
 		int			getGrade() const;
 		void		gradeIncreament();
 		void		gradeDecreament();
+		void		signAForm(AForm &Aform);
+		void		executeForm(AForm const &Aform);
 };
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);

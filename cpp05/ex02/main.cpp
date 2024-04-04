@@ -11,21 +11,25 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int	main()
 {
-	std::cout << "Test" << std::endl;
-	Bureaucrat test1 = Bureaucrat("Chris", 1);
-	Bureaucrat test2 = Bureaucrat("Bob", 75);
-	Bureaucrat test3 = Bureaucrat("John", 150);
-	test2.gradeIncreament();
-	test2.gradeIncreament();
-	std::cout << test2;
-	test3.gradeDecreament();
-	test3.gradeDecreament();
-	std::cout << test3;
-
-	std::cout << "Fail Test" << std::endl;
-	Bureaucrat test4 = Bureaucrat("Chris", -5);
-	Bureaucrat test6 = Bureaucrat("John", 170);
+	Bureaucrat person1("Christian", 39);
+	ShrubberyCreationForm form1("target");
+	person1.signAForm(form1);
+	person1.executeForm(form1);
+	std::cout << "--------------------------------------------------------------" << std::endl;
+	Bureaucrat person2("John", 19);
+	RobotomyRequestForm form2("target");
+	person2.signAForm(form2);
+	person2.executeForm(form2);
+	// std::cout << "--------------------------------------------------------------" << std::endl;
+	Bureaucrat person3("Mike",3);
+	PresidentialPardonForm form3("target");
+	person3.signAForm(form3);
+	person3.executeForm(form3);
 }

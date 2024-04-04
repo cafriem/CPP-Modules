@@ -10,44 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 
-#include <iostream>
-#include <cstdlib>
-#include <string>
+#include "AForm.hpp"
 
-class	Bureaucrat
+class	ShrubberyCreationForm : public AForm
 {
 	private:
-		const std::string	_name;
-		int					_grade;
-
-		class gradeTooLowExpectation : public std::exception
+		std::string	_target;
+		void		_asciiTree() const;
+		class	fileError : public std::exception
 		{
 			public:
-				virtual const char *what() const throw();
-		};
-
-		class gradeTooHighExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
+				const char *what() const throw();
 		};
 
 	public:
-		Bureaucrat();
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(Bureaucrat const &object);
-		Bureaucrat &operator=(Bureaucrat const &rhs);
-		~Bureaucrat();
+		ShrubberyCreationForm();
+		ShrubberyCreationForm(std::string _target);
+		ShrubberyCreationForm(ShrubberyCreationForm const &object);
+		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);
+		~ShrubberyCreationForm();
 
-		std::string	getName() const;
-		int			getGrade() const;
-		void		gradeIncreament();
-		void		gradeDecreament();
+		void		execute(Bureaucrat const &executor) const;
+		std::string	getTarget() const;
 };
-
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);
 
 #endif

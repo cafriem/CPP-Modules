@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/03/24 19:36:35 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:10:21 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ int	Bureaucrat::getGrade()const
 
 const char* Bureaucrat::gradeTooHighExpectation::what() const throw()
 {
-	return("Bureaucrat Grade Too High");
+	return("Grade Too High");
 }
 
 const char* Bureaucrat::gradeTooLowExpectation::what() const throw()
 {
-	return("Bureaucrat Grade Too Low");
+	return("Grade Too Low");
 }
 
 void	Bureaucrat::gradeIncreament()
@@ -132,4 +132,19 @@ void	Bureaucrat::gradeDecreament()
 	{
 		std::cerr << e.what() << '\n';
 	}
+}
+
+void	Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << this->_name << "could't sign " << form.getName() <<
+		" because " <<e.what() << '\n';
+	}
+	
 }

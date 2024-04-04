@@ -10,44 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef BASE_HPP
+# define BASE_HPP
 
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <fstream>
 
-class	Bureaucrat
+class Base
 {
-	private:
-		const std::string	_name;
-		int					_grade;
-
-		class gradeTooLowExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class gradeTooHighExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
 	public:
-		Bureaucrat();
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(Bureaucrat const &object);
-		Bureaucrat &operator=(Bureaucrat const &rhs);
-		~Bureaucrat();
-
-		std::string	getName() const;
-		int			getGrade() const;
-		void		gradeIncreament();
-		void		gradeDecreament();
+		virtual ~Base();
 };
-
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);
 
 #endif

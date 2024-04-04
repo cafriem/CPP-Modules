@@ -10,44 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
-#include <iostream>
-#include <cstdlib>
-#include <string>
+#include "AForm.hpp"
 
-class	Bureaucrat
+class	PresidentialPardonForm : public AForm
 {
 	private:
-		const std::string	_name;
-		int					_grade;
-
-		class gradeTooLowExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class gradeTooHighExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
+		std::string	_target;
 
 	public:
-		Bureaucrat();
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(Bureaucrat const &object);
-		Bureaucrat &operator=(Bureaucrat const &rhs);
-		~Bureaucrat();
+		PresidentialPardonForm();
+		PresidentialPardonForm(std::string _target);
+		PresidentialPardonForm(PresidentialPardonForm const &object);
+		PresidentialPardonForm &operator=(const PresidentialPardonForm &rhs);
+		~PresidentialPardonForm();
 
-		std::string	getName() const;
-		int			getGrade() const;
-		void		gradeIncreament();
-		void		gradeDecreament();
+		void		execute(Bureaucrat const &executor) const;
+		std::string	getTarget() const;
 };
-
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);
 
 #endif

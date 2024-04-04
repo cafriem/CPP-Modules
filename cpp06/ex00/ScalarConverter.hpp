@@ -10,44 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
 
 #include <iostream>
 #include <cstdlib>
 #include <string>
 
-class	Bureaucrat
+class ScalarConverter
 {
 	private:
-		const std::string	_name;
-		int					_grade;
-
-		class gradeTooLowExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class gradeTooHighExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
+		ScalarConverter();
+		ScalarConverter(ScalarConverter const &object);
+		ScalarConverter &operator=(ScalarConverter const &rhs);
+		~ScalarConverter();
 
 	public:
-		Bureaucrat();
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(Bureaucrat const &object);
-		Bureaucrat &operator=(Bureaucrat const &rhs);
-		~Bureaucrat();
-
-		std::string	getName() const;
-		int			getGrade() const;
-		void		gradeIncreament();
-		void		gradeDecreament();
+		static void	isChar(std::string str);
+		static void	isInt(std::string str);
+		static void	isFloat(std::string str);
+		static void	isDouble(std::string str);
+		static void	convert(std::string str);
 };
-
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);
 
 #endif

@@ -10,44 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
-#include <iostream>
-#include <cstdlib>
-#include <string>
+#include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 
-class	Bureaucrat
+class	Bureaucrat;
+class	AForm
 {
 	private:
+		bool				_signed;
 		const std::string	_name;
-		int					_grade;
+		const int			_gradeSign;
+		const int			_gradeExecute;
 
+	protected:
 		class gradeTooLowExpectation : public std::exception
 		{
 			public:
-				virtual const char *what() const throw();
+				const char *what() const throw();
 		};
 
 		class gradeTooHighExpectation : public std::exception
 		{
 			public:
-				virtual const char *what() const throw();
+				const char *what() const throw();
 		};
 
 	public:
-		Bureaucrat();
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(Bureaucrat const &object);
-		Bureaucrat &operator=(Bureaucrat const &rhs);
-		~Bureaucrat();
+		AForm();
+		AForm(const std::string name, const int gradsign, const int gradeExecution);
+		AForm(const AForm& object);
+		AForm &operator=(AForm const &rhs);
+		virtual ~AForm() = 0;
 
-		std::string	getName() const;
-		int			getGrade() const;
-		void		gradeIncreament();
-		void		gradeDecreament();
+		bool			getSigned() const;
+		void			beSigned(Bureaucrat const &rhs);
+		std::string		getName() const;
+		int				getGradeSign() const;
+		int				getGradeExec() const;
+		virtual void	execute(Bureaucrat const &excecutor)const = 0;
 };
 
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);
+std::ostream &operator<<(std::ostream &out, AForm const &rhs);
 
 #endif

@@ -10,22 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "Serialize.hpp"
 
 int	main()
 {
-	std::cout << "Test" << std::endl;
-	Bureaucrat test1 = Bureaucrat("Chris", 1);
-	Bureaucrat test2 = Bureaucrat("Bob", 75);
-	Bureaucrat test3 = Bureaucrat("John", 150);
-	test2.gradeIncreament();
-	test2.gradeIncreament();
-	std::cout << test2;
-	test3.gradeDecreament();
-	test3.gradeDecreament();
-	std::cout << test3;
+	Data data;
+	data.data = "Testing examples";
+	data.c = 42;
 
-	std::cout << "Fail Test" << std::endl;
-	Bureaucrat test4 = Bureaucrat("Chris", -5);
-	Bureaucrat test6 = Bureaucrat("John", 170);
+	// Serialize ser;
+	
+	uintptr_t serializedValue = Serialize::serialize(&data);
+	std::cout << "serializedValue  : " << serializedValue << std::endl;
+	
+	Data *deserializedValue = Serialize::deserialize(serializedValue);
+
+	std::cout << "-----------------------------------------------" << std::endl;
+	std::cout << "&data            : " << &data << std::endl;
+	std::cout << "deserializeValue : " << deserializedValue << std::endl;
+	std::cout << deserializedValue->c << " + " << deserializedValue->data << std::endl;
+	return (0);
 }

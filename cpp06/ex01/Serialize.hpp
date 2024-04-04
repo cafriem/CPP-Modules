@@ -10,44 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef SERIALIZE_HPP
+# define SERIALIZE_HPP
 
 #include <iostream>
 #include <cstdlib>
 #include <string>
 
-class	Bureaucrat
+struct Data
 {
-	private:
-		const std::string	_name;
-		int					_grade;
-
-		class gradeTooLowExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class gradeTooHighExpectation : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-	public:
-		Bureaucrat();
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(Bureaucrat const &object);
-		Bureaucrat &operator=(Bureaucrat const &rhs);
-		~Bureaucrat();
-
-		std::string	getName() const;
-		int			getGrade() const;
-		void		gradeIncreament();
-		void		gradeDecreament();
+	std::string	data;
+	int			c;
 };
 
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);
+class Serialize
+{
+	private:
+		Serialize();
+		Serialize(Serialize const &object);
+		Serialize &operator=(Serialize const &rhs);
+
+	public:
+		~Serialize();
+		static uintptr_t serialize(Data *ptr);
+		static Data *deserialize(uintptr_t raw);
+};
 
 #endif

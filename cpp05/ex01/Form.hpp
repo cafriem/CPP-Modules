@@ -10,18 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+# define FORM_HPP
 
-#include <iostream>
-#include <cstdlib>
-#include <string>
+#include "Bureaucrat.hpp"
 
-class	Bureaucrat
+class	Bureaucrat;
+class	Form
 {
 	private:
+		bool				_signed;
 		const std::string	_name;
-		int					_grade;
+		const int			_gradeSign;
+		const int			_gradeExecute;
 
 		class gradeTooLowExpectation : public std::exception
 		{
@@ -36,18 +37,19 @@ class	Bureaucrat
 		};
 
 	public:
-		Bureaucrat();
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(Bureaucrat const &object);
-		Bureaucrat &operator=(Bureaucrat const &rhs);
-		~Bureaucrat();
+		Form();
+		Form(const std::string name, const int gradsign, const int gradeExecution);
+		Form(const Form& object);
+		Form &operator=(const Form &rhs);
+		~Form();
 
+		bool		getSigned() const;
+		void		beSigned(Bureaucrat const &rhs);
 		std::string	getName() const;
-		int			getGrade() const;
-		void		gradeIncreament();
-		void		gradeDecreament();
+		int			getGradeSign() const;
+		int			getGradeExec() const;
 };
 
-std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs);
+std::ostream &operator<<(std::ostream &out, Form const &rhs);
 
 #endif

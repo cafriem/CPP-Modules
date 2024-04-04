@@ -1,10 +1,10 @@
-NAME = Bureaucrat
+NAME = base
 
 CXX = c++
 
 CXXFLAGS = -std=c++98 -Wall -Werror -Wextra
 
-SRCS = main.cpp Bureaucrat.cpp
+SRCS = main.cpp Base.cpp A.cpp B.cpp C.cpp Start.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -23,7 +23,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-
 
 .PHONY: all clean fclean re
