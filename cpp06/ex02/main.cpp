@@ -16,7 +16,19 @@
 #include "B.hpp"
 #include "C.hpp"
 
-int	main()
+int main()
 {
-	Base *a = generate();
+	for (int c = 0; c < 6; c++)
+	{
+		Base *test1;
+		test1 = generate();
+		identify(test1);
+		identify(*test1);
+		delete test1;
+	}
+	// Base *test2;
+	// test2 = generate();
+	// identify(test2);
+	// identify(*test2);
+	// delete test2;
 }

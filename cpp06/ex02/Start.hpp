@@ -18,10 +18,8 @@
 #include "B.hpp"
 #include "C.hpp"
 
-class Start
-{
-	public:
-		virtual ~Start();
-};
+void	identify(Base *p);
+void	identify(Base &p);
+Base	*generate(void);
 
 #endif
