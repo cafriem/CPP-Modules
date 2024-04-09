@@ -15,11 +15,9 @@
 int	main()
 {
 	Data data;
-	data.data = "Testing examples";
+	data.data = "Testing";
 	data.c = 42;
 
-	// Serialize ser;
-	
 	uintptr_t serializedValue = Serialize::serialize(&data);
 	std::cout << "serializedValue  : " << serializedValue << std::endl;
 	

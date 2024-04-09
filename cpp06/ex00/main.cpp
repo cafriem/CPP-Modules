@@ -14,9 +14,11 @@
 
 bool	is_Char(std::string str)
 {
-	if (str.length() == 1 && (str != "nan" || str != "inff" || str != "-inff"))
+	if (str.length() == 1 && (str != "nan" || str != "inff" || str != "-inff"
+		|| str == "inf" || str == "-inf"))
 		return(true);
-	else if (str == "nan" || str == "inff" || str == "-inff")
+	else if (str == "nan" || str == "inff" || str == "-inff"
+		|| str == "inf" || str == "-inf")
 		return(true);
 	return(false);
 }

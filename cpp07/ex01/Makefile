@@ -1,10 +1,10 @@
-NAME = Convert
+NAME = iter
 
 CXX = c++
 
 CXXFLAGS = -std=c++98 -Wall -Werror -Wextra
 
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
