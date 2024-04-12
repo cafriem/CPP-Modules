@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/04/04 12:00:05 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/04 12:45:39 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	Bureaucrat::executeForm(AForm const &Aform)
 	try
 	{
 		Aform.execute(*this);
-		std::cout << _name << "executes" << Aform.getName() << std::endl;
+		std::cout << _name << " executes " << Aform.getName() << std::endl;
 	}
 	catch(const std::exception& e)
 	{

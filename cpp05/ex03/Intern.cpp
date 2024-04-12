@@ -45,8 +45,10 @@ AForm	*Intern::makeForm(std::string name, std::string target)
 {
 	std::string str[3] = {"President pardon", "Robotomy", "Shrubbery"};
 	int	c = 0;
-	while (name.empty() != false && c < 3 && name.compare(str[c]) != 0)
+	while (name.empty() == false && c < 3 && name.compare(str[c]) != 0)
+	{
 		c++;
+	}
 	c++;
 	switch (c)
 	{

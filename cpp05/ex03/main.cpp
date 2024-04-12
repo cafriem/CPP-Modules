@@ -18,11 +18,13 @@
 
 int main()
 {
-	std::string formName = "shrubbery creation"; 
+	std::string formName = "Robotomy"; 
 	std::string formTarget = "garbage";
 	Intern whocares;
 	Bureaucrat bureaucrat("John", 1);
+		std::cout << "------------------------------" << std::endl;
 	AForm *f = whocares.makeForm(formName, formTarget);
+		std::cout << "------------------------------" << std::endl;
 	std::cout << *f;
 	bureaucrat.signAForm(*f);
 	std::cout << (*f).getSigned() << std::endl;
