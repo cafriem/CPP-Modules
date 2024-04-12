@@ -1,4 +1,4 @@
-NAME = Array
+NAME = MutantStack
 
 CXX = c++
 

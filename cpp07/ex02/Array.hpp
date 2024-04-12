@@ -15,6 +15,7 @@
 
 #include <cstdlib>
 #include <iostream>
+
 template <typename T>
 
 class Array
@@ -29,11 +30,13 @@ class Array
 			std::cout << "Array Constructor Called" << std::endl;
 			_data = new T[_c];
 		}
+
 		Array<T>(unsigned int c): _c(c)
 		{
 			std::cout << "Array Constructor Called" << std::endl;
 			_data = new T[_c];
 		}
+
 		Array<T>(const Array<T> &a):_c(a.size())
 		{
 			std::cout << "Array Copy Constructor Called" << std::endl;
@@ -43,6 +46,7 @@ class Array
 				_data[i] = a._data[i];
 			}
 		}
+
 		Array<T> &operator=(const Array<T> &rhs)
 		{
 			std::cout << "Array Copy Assignment Operator = " << std::endl;
@@ -57,27 +61,31 @@ class Array
 			}
 			return (*this);
 		}
+
+		~Array<T>()
+		{
+			std::cout << "Array Destructor Called" << std::endl;
+			if(_data != NULL)
+				delete[] _data;
+		}
+
 		T &operator[](std::size_t i) 
 		{
 			if (_data == NULL ||  i >= _c)
 				throw std::runtime_error("Out of Bounds");
 			return (_data[i]);
 		}
+
 		T const &operator[](std::size_t i) const 
 		{
 			if (_data == NULL || i >= _c)
 				throw std::runtime_error("Out of Bounds");
 			return (_data[i]);
 		}
+
 		unsigned int size() const
 		{
 			return (_c);
-		}   
-		~Array<T>() 
-		{
-			std::cout << "Array Destructor Called" << std::endl;
-			if(_data != NULL)
-				delete[] _data;
 		}
 };
 
