@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FragTrap.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 11:05:51 by cafriem           #+#    #+#             */
+/*   Updated: 2024/01/08 03:46:40 by cafriem          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
+
+#include <map>
+#include <cfloat>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <stdlib.h>
+#include <algorithm>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+class BitcoinExchange
+{
+	private:
+		std::string _filename;
+		std::map<std::string, float> _values;
+
+	public:
+		BitcoinExchange();
+		BitcoinExchange(std::string filename); // * Do i need this ? 
+		BitcoinExchange(BitcoinExchange const &obj);
+		BitcoinExchange& operator=(BitcoinExchange const &rhs);
+		~BitcoinExchange();
+
+		std::string getFilename(char *filename);
+		void readDataFile();
+		std::string parseFilename(std::string const filename);
+		// void BitcoinExchange::calculateValue(const std::string &date, float e_multiplyiplier);
+		bool checkforPair(std::string line);
+		bool checkforDates(std::string line);
+		bool validDateFormat(std::string year, std::string month, std::string date);
+		bool ValidDay(std::string &line);
+		bool checkforValues(std::string line);
+		std::string LowerBound(std::string &date);
+		void  calculateValue(std::string &rate);
+
+	class FileIssues: public std::exception
+	{
+		private:
+			std::string errorMessage;
+		public:
+			FileIssues(std::string error);
+			const char *what() const throw() ;
+			virtual ~FileIssues() throw();
+	};
+};
+
+#endif
