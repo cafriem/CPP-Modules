@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/04/17 02:38:47 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/17 02:40:18 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,16 @@ BitcoinExchange::~BitcoinExchange()
 	std::cout << "BitcoinExchange Destructor called" << std::endl;
 }
 
+BitcoinExchange::FileIssues::FileIssues(std::string error) : errorMessage(error)
+{}
+
 const char* BitcoinExchange::FileIssues:: what(void) const throw()
 {
 	return (errorMessage.c_str());
 }
 
-BitcoinExchange::FileIssues::FileIssues(std::string error) : errorMessage(error) {};
-
-BitcoinExchange::FileIssues::~FileIssues() throw() {};
+BitcoinExchange::FileIssues::~FileIssues() throw()
+{}
 
 std::string BitcoinExchange::getFilename(char* filename)
 {
