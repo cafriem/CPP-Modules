@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/04/18 12:58:55 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/18 14:15:56 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	RPN::calculate(int c, int c2, int flag)
 		case e_divide:
 		{
 			if (c2 != 0)
+				return (c / c2);
+			else
 			{
 				std::cout << "A number can not be divided by zero" << std::endl;
 				return (0);
 			}
-			else
-				return (c / c2);
 		}
 	}
 	return (0);
