@@ -33,22 +33,20 @@ class BitcoinExchange
 
 	public:
 		BitcoinExchange();
-		BitcoinExchange(std::string filename); // * Do i need this ? 
+		BitcoinExchange(std::string filename);
 		BitcoinExchange(BitcoinExchange const &obj);
 		BitcoinExchange& operator=(BitcoinExchange const &rhs);
 		~BitcoinExchange();
 
+		std::string	fileParse(std::string const filename);
 		std::string getFilename(char *filename);
-		void readDataFile();
-		std::string parseFilename(std::string const filename);
-		// void BitcoinExchange::calculateValue(const std::string &date, float e_multiplyiplier);
-		bool checkforPair(std::string line);
-		bool checkforDates(std::string line);
-		bool validDateFormat(std::string year, std::string month, std::string date);
-		bool ValidDay(std::string &line);
-		bool checkforValues(std::string line);
-		std::string LowerBound(std::string &date);
-		void  calculateValue(std::string &rate);
+		std::string	LowerBound(std::string &date);
+		void		openfile();
+		bool		checkLine(std::string str);
+		bool		checkDate(std::string str);
+		bool		dateFormat(std::string year, std::string month, std::string date);
+		bool		checkValue(std::string str);
+		void		calculate(std::string &rate);
 
 	class FileIssues: public std::exception
 	{

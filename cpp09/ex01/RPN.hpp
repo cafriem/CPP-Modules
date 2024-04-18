@@ -36,8 +36,14 @@ class	RPN
 		RPN &operator=(RPN const &rhs);
 		~RPN();
 
-		int		calculation(int c, int c2, int flag);
+		int		calculate(int c, int c2, int flag);
 		void	exec(char *str);
+};
+
+class	Errorclass: public std::exception
+{
+	public:
+		const char *what() const throw();
 };
 
 enum	flag
@@ -46,12 +52,6 @@ enum	flag
 	e_minus = '-',
 	e_divide = '/',
 	e_multiply = '*'
-};
-
-class	Errorclass: public std::exception
-{
-	public:
-		const char *what() const throw();
 };
 
 #endif

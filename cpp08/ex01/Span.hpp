@@ -23,7 +23,7 @@ class Span
 {
 	private:
 		unsigned int		_c;
-		std::vector<int>	_vector;
+		std::vector<int>	_vectortor;
 		class	ContainerEmptyException : public std::exception
 		{
 			public:

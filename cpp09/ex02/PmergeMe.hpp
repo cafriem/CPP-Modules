@@ -32,35 +32,35 @@
 class PmergeMe
 {
 	private:
-		std::vector<int>	_vec;
-		std::deque<int>		_deq;
-		std::vector<int>	_vec_sequence;
-		std::deque<int>		_deq_sequence;
+		std::vector<int>	_vector;
+		std::deque<int>		_deque;
+		std::vector<int>	_vectorCont;
+		std::deque<int>		_dequeCont;
 
 	public:
-		PmergeMe(void);
+		PmergeMe();
+		PmergeMe(char **argv);
 		PmergeMe(PmergeMe const &copy);
 		PmergeMe &operator=(PmergeMe const &rhs);
 		~PmergeMe(void);
 	
-		void	_sort_containers(void);
-		bool	_already_sorted(void);
-		void	_create_sequence(int size);
+		void	sortCont();
+		bool	vectorSort();
+		void	init(int size);
+		void	sortDeq();
 		void	printRes(clock_t stime, clock_t ftime);
 		void	printVector();
 		void	printDeq();
-		void	_sort_vector();
-		void	_sort_deque();
+		void	sortVector();
 
 
 		template <typename T>
-		T	_transfer(T &container);
+		T	tran_cont(T &container);
 		template <typename T>
-		void	_rearrange(T &container, T &temp);
+		void	arr_cont(T &container, T &temp);
 		template <typename T>
-		void	_return(T &container, T &temp, T &sequence);
+		void	ret(T &container, T &temp, T &sequence);
 
-		PmergeMe(char **argv);
 	
 };
 

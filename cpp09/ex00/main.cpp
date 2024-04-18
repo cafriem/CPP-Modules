@@ -19,10 +19,10 @@ int main(int argc, char **argv)
 		BitcoinExchange read;
 		try
 		{
-			read.readDataFile();
+			read.openfile();
 			std::string filename = read.getFilename(argv[1]);
-			std::string info = read.parseFilename(filename);
-			read.calculateValue(info);
+			std::string info = read.fileParse(filename);
+			read.calculate(info);
 		}
 		catch(BitcoinExchange::FileIssues &e)
 		{

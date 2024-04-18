@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/04/17 02:40:18 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/18 13:58:41 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ std::string BitcoinExchange::getFilename(char* filename)
 	return(this->_filename);
 }
 
-void BitcoinExchange::readDataFile()
+void BitcoinExchange::openfile()
 {
 	std::ifstream file("data.csv");
 	if(file.fail())
@@ -77,53 +77,48 @@ void BitcoinExchange::readDataFile()
 	file.close();
 }
 
-bool BitcoinExchange::checkforValues(std::string line)
+bool BitcoinExchange::checkValue(std::string str)
 {
-	std::stringstream stream(line);
-	std::string value;
-	int valueCount = 0;  // Count of values
+	std::stringstream	stream(str);
+	std::string			value;
+	int					valueCount = 0;
+	char				*strpoint;
 
 	while (getline(stream, value, ' '))
 	{
-		// Remove leading and trailing spaces from each value
-		value.erase(value.find_last_not_of(" \t") + 1);
-		value.erase(0, value.find_first_not_of(" \t"));
-
-		// Check if the value contains only a single period ('.')
 		if (value == ".")
 		{
 			std::cout << "Error: Cannot have only a '.' in the value" << std::endl;
 			return false;
 		}
-		char *endptr;
-		long number = strtol(value.c_str(), &endptr, 10);
+		long number = strtol(value.c_str(), &strpoint, 10);
 		for (std::string::iterator it = value.begin(); it != value.end(); ++it)
 		{
 			if (!std::isdigit(*it) && *it != '.' && *it != '-' && *it != ' ')
 			{
-				std::cout << "Error: Invalid character '" << *it << "' found in value." << std::endl;
+				std::cout << "Error: Invalid character '" << *it << std::endl;
 				return false;
 			}
 			if(std::count(value.begin(), value.end(), '.') > 2)
 			{
-				std::cout << "Error: Double decimal'" << *it << "' found in value." << std::endl;
+				std::cout << "Error: Double decimal'" << *it << std::endl;
 				return false;
 			}
 		}
 		if (number > 1000)
 		{ 
-			std::cout << "Error : Value number too large => " << number <<  std::endl;
+			std::cout << "Error: Number too large => " << number <<  std::endl;
 			return false;
 		}
 		else if (number < 0)
 		{ 
-			std::cout << "Error : not a positive number => " << number << std::endl;
+			std::cout << "Error: Negative Number => " << number << std::endl;
 			return false;
 		}
 		valueCount++;
 		if (valueCount > 1)
 		{
-			std::cout << "Error: More than one value found in the input" << std::endl;
+			std::cout << "Error: Multiple Values" << std::endl;
 			return false;
 		}
 	}
@@ -131,13 +126,13 @@ bool BitcoinExchange::checkforValues(std::string line)
 	return true;
 }
 
-bool BitcoinExchange::validDateFormat(std::string year,std::string month, std::string date)
+bool BitcoinExchange::dateFormat(std::string year,std::string month, std::string date)
 {
 	for (std::string::iterator it = year.begin(); it != year.end(); ++it)
 	{
 		if (!std::isdigit(*it))
 		{
-			std::cout << "Error: Invalid character '" << *it << "' found in value." << std::endl;
+			std::cout << "Error: Invalid character '" << *it << std::endl;
 			return (false);
 		}
 	}
@@ -145,7 +140,7 @@ bool BitcoinExchange::validDateFormat(std::string year,std::string month, std::s
 	{
 		if (!std::isdigit(*it))
 		{
-			std::cout << "Error: Invalid character '" << *it << "' found in value." << std::endl;
+			std::cout << "Error: Invalid character '" << *it << std::endl;
 			return (false);
 		}
 	}
@@ -153,69 +148,62 @@ bool BitcoinExchange::validDateFormat(std::string year,std::string month, std::s
 	{
 		if (!std::isdigit(*it))
 		{
-			std::cout << "Error: Invalid character '" << *it << "' found in value." << std::endl;
+			std::cout << "Error: Invalid character '" << *it << std::endl;
 			return (false);
 		}
 	}
 	return (true);
 }
 
-bool BitcoinExchange::checkforDates(std::string line)
+bool BitcoinExchange::checkDate(std::string str)
 {
-	std::stringstream stream(line);
+	std::stringstream stream(str);
 	std::string year, month, day;
-		
+
 	getline(stream, year, '-');
 	getline(stream, month, '-');
 	getline(stream, day);
-		
-	bool ValidDateFormat = validDateFormat(year, month, day);
-	if(ValidDateFormat != false)
+	if(dateFormat(year, month, day))
 	{	
 		int i_year = atoi(year.c_str());
 		int i_month = atoi(month.c_str());
 		int i_day = atoi(day.c_str());
 		if((i_year % 4) == 0)
 		{
-			if(i_year < 2009 ||  i_year > 2022 ||year.size() > 4)
-				{std::cout << "Error: Incorrect year => " << i_year << '-' << month << '-'<< day << std::endl; return (false);}
-			else if (i_month < 1 || i_month > 12 || month.size() > 2)
-				{std::cout << "Error: Incorrect month => " << year << '-' << month << '-'<< day << std::endl; return (false);}
-			else if (i_day < 1 || i_day > 31 || day.size() > 3)
-				{std::cout << "Error: Incorrect day => " << year << '-' << month << '-'<< day << std::endl; return(false);} 
-			else if( i_month == 2 && i_day > 29)
-				{std::cout << "Error: Leap Year is 29 days in Feburary => " << year << "-" << i_month << "-" << i_day << std::endl; return (false);}
+			if ((day.size() > 3 || i_day < 1 || i_day > 31)
+				|| (i_month == 2 && i_day > 29)
+				|| (i_month < 1 || i_month > 12 || month.size() > 2)
+				|| (i_year < 2009 || i_year > 2022 || year.size() > 4))
+			{
+				std::cout << "Error: Incorrect date => " << year << '-' << month << '-' << day << std::endl;
+				return(false);
+			} 
 		}
 		else
 		{
-			if(i_year < 2009 || i_year > 2022 || year.size() > 4)
-				{std::cout << "Error: Incorrect year => " << i_year << '-' << month << '-'<< day << std::endl; return (false);}
-			else if (i_month < 1 || i_month > 12 || month.size() > 2)
-				{std::cout << "Error: Incorrect month => " << i_year << '-' << month << '-'<< day<< std::endl; return (false);}
-			else if (i_day < 1 || i_day > 31 || day.size() > 3)
-				{std::cout << "Error: Incorrect day => " << i_year << '-' << month << '-'<< day << std::endl; return(false);} 
-			else if(i_month == 2 && i_day > 28)
-				{std::cout << "Error: Not a leap year which is 28 days in Feburary => " << i_year << "-" << i_month << "-" << i_day << std::endl; return (false);}
-		}	
+			if ((day.size() > 3 || i_day < 1 || i_day > 31)
+				|| (i_month == 2 && i_day > 28)
+				|| (i_month < 1 || i_month > 12 || month.size() > 2)
+				|| (i_year < 2009 || i_year > 2022 || year.size() > 4))
+			{
+				std::cout << "Error: Incorrect date => " << i_year << '-' << month << '-' << day << std::endl;
+				return(false);
+			}
+		}
 	}
-	return (ValidDateFormat);
+	return (dateFormat(year, month, day));
 }
 
-bool BitcoinExchange::checkforPair(std::string line)
+bool BitcoinExchange::checkLine(std::string str)
 {
-	std::stringstream stream(line);
+	std::stringstream stream(str);
 	std::string dates, value, pipe;
 	getline(stream, dates, ' ');
 	getline(stream, pipe, ' ');
 	getline(stream, value);
-	if(std::count(line.begin(), line.end(), '|') > 1 || std::count(line.begin(), line.end(), '|') == 0)
+	if(std::count(str.begin(), str.end(), '|') > 1 || value.empty())
 	{
-		std::cout << "Error: bad input => " << line << std::endl;
-		return (false);
-	}
-	else if(value.empty())
-	{
-		std::cout << "Error: Empty Value => " << line << std::endl;
+		std::cout << "Error: bad input => " << str << std::endl;
 		return (false);
 	}
 	return (true);
@@ -250,7 +238,7 @@ std::string BitcoinExchange::LowerBound(std::string &date)
 	return (new_date);
 }
 
-std::string BitcoinExchange::parseFilename(std::string const filename)
+std::string BitcoinExchange::fileParse(std::string const filename)
 {
 	if (filename.length() < 4)
 		throw FileIssues("Filename is less than 4 characters");
@@ -274,7 +262,7 @@ std::string BitcoinExchange::parseFilename(std::string const filename)
 	return (oss.str()); 
 }
 
-void BitcoinExchange::calculateValue(std::string &data)
+void BitcoinExchange::calculate(std::string &data)
 {
 	std::stringstream ff(data);
 	std::string line;
@@ -287,15 +275,15 @@ void BitcoinExchange::calculateValue(std::string &data)
 		getline(lol, value);
 		if(this->_values.end() == this->_values.find(date) )
 		{
-			if(this->checkforValues(value) && this->checkforDates(date) && this->checkforPair(line))
+			if(this->checkValue(value) && this->checkDate(date) && this->checkLine(line))
 			{
-				bool flag = this->checkforDates(date);	
+				bool flag = this->checkDate(date);	
 				while(this->_values.find(date) == this->_values.end() && flag)
 				{
-					flag = this->checkforDates(date);
+					flag = this->checkDate(date);
 					date = this->LowerBound(date);
 				}
-				if(this->checkforValues(value) && flag && this->checkforPair(line))
+				if(this->checkValue(value) && flag && this->checkLine(line))
 				{
 					std::cout << date  << " => " << atof(value.c_str()) << " = ";
 					std::cout << this->_values[date] * atof(value.c_str()) << '\n';
@@ -304,7 +292,7 @@ void BitcoinExchange::calculateValue(std::string &data)
 		}
 		else
 		{
-			if(this->checkforValues(value) && this->checkforDates(date) && this->checkforPair(line))
+			if(this->checkValue(value) && this->checkDate(date) && this->checkLine(line))
 			{
 				std::cout << date  << " => " << atof(value.c_str()) << " = ";
 				std::cout << this->_values[date] * atof(value.c_str()) << '\n';

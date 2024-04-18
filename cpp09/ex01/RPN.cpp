@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/04/17 02:34:35 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/18 12:58:55 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ RPN::~RPN()
 	std::cout << "RPN Destructor called" << std::endl;
 }
 
-int	RPN::calculation(int c, int c2, int flag)
+int	RPN::calculate(int c, int c2, int flag)
 {
 	switch (flag)
 	{
@@ -67,35 +67,34 @@ int	RPN::calculation(int c, int c2, int flag)
 
 void	RPN::exec(char *str)
 {
-	std::stringstream	c_str;
 	std::string			n_str;
 	std::string			before;
 
 	n_str = str;
-	if (n_str.empty() || n_str.find_first_not_of("1234567890 +-/*") != std::string::npos)
+	if (n_str.empty() || n_str.find_first_not_of("1234567890+-/* ") != std::string::npos)
 		throw (Errorclass());
+	std::stringstream	c_str;
 	c_str << str;
-	int		num2;
-	int		num1;
-	char	flag;
+	int			num2;
+	int			num1;
+	char		flag;
 	while (c_str >> n_str)
 	{
 		if (n_str.size() > 1)
 			throw (Errorclass());
 		before = n_str;
 		if (n_str.find_first_not_of("1234567890") == std::string::npos)
-			_number.push(std::atoi(n_str.c_str()));
-		if (before.find_first_of("+-/*") != std::string::npos
-			&& n_str.find_first_of("+-/*") != std::string::npos && _number.size() < 2)
+			_number.push(atoi(n_str.c_str()));
+		if (n_str.find_first_of("+-/*") != std::string::npos && _number.size() < 2)
 			throw (Errorclass());
-		if (_number.size() >= 2 && n_str.find_first_of("+-/*") != std::string::npos)
+		if (n_str.find_first_of("+-/*") != std::string::npos && _number.size() >= 2)
 		{
 			num2 = _number.top();
 			_number.pop();
 			num1 = _number.top();
 			_number.pop();
 			flag = (int)n_str[0];
-			_number.push(this->calculation(num1, num2, flag));
+			_number.push(this->calculate(num1, num2, flag));
 		}
 	}
 	if (_number.size() >= 2 || _number.size() == 0

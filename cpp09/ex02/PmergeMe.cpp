@@ -17,6 +17,19 @@ PmergeMe::PmergeMe()
 	std::cout << "PmergeMe Constructor Called" << std::endl;
 }
 
+PmergeMe::PmergeMe(char **argv)
+{
+	std::cout << "Before: ";
+	for (size_t i = 0; argv[i]; i++)
+	{
+		this->_vector.push_back(atoi(argv[i]));
+		this->_deque.push_back(atoi(argv[i]));
+		std::cout << " " << atoi(argv[i]) << " ";
+	}
+	std::cout << std::endl;
+	this->sortCont();
+}
+
 PmergeMe::PmergeMe(const PmergeMe &object)
 {
 	std::cout << "PmergeMe Copy Constructor Called" << std::endl;
@@ -36,27 +49,23 @@ PmergeMe::~PmergeMe()
 	std::cout << "PmergeMe Destructor called" << std::endl;
 }
 
-void PmergeMe::printVector()
+void PmergeMe::sortCont()
 {
-	std::cout << "After : ";
-	for(unsigned long i = 0; i < _vec.size(); i++)
+	if (vectorSort())
+		std::cout << "This set is already sorted" << std::endl;
+	else
 	{
-		std::cout << " " << _vec.at(i) << " ";
+		clock_t	stime;
+		clock_t	ftime;
+		init(this->_vector.size());
+		stime = clock();
+		this->sortVector();
+		ftime = clock();
+		printRes(stime, ftime);
 	}
-	std::cout << std::endl;
 }
 
-void PmergeMe::printDeq()
-{
-	std::cout << "After : ";
-	for(unsigned long i = 0; i < _deq.size(); i++)
-	{
-		std::cout << " " << _deq.at(i) << " ";
-	}
-	std::cout << std::endl;
-}
-
-void PmergeMe::_create_sequence(int size)
+void PmergeMe::init(int size)
 {
 	std::vector<int>	sortmerge;
 	int					c = 1;
@@ -68,33 +77,109 @@ void PmergeMe::_create_sequence(int size)
 		sortmerge.push_back(sortmerge[c] + (2 * sortmerge[c - 1]));
 		c++;
 	}
+	this->_vectorCont.push_back(1);
+	this->_dequeCont.push_back(1);
+	sortmerge.erase(sortmerge.begin());
+	sortmerge.erase(sortmerge.begin());
 	c = 1;
-	this->_vec_sequence.push_back(1);
-	this->_deq_sequence.push_back(1);
+	int numbers = sortmerge[1] - sortmerge[0];
+	int i = (sortmerge[1] - sortmerge[0]) + 1;
+	int reached = (sortmerge[1] - sortmerge[0]) + 1;
 	sortmerge.erase(sortmerge.begin());
-	sortmerge.erase(sortmerge.begin());
-	int numbers = sortmerge[c] - sortmerge[c - 1];
-	int i = numbers + 1;
-	int reached = i;
-	sortmerge.erase(sortmerge.begin());
-	while (!sortmerge.empty())
+	while (sortmerge.empty() == 0)
 	{
 		while (numbers--)
 		{
-			this->_vec_sequence.push_back(i);
-			this->_deq_sequence.push_back(i--);
+			this->_vectorCont.push_back(i);
+			this->_dequeCont.push_back(i--);
 		}
-		numbers = sortmerge[c] - sortmerge[c - 1];
-		i = numbers + reached;
-		reached = i;
+		numbers = sortmerge[1] - sortmerge[0];
+		i = (sortmerge[1] - sortmerge[0]) + reached;
+		reached += numbers;
 		sortmerge.erase(sortmerge.begin());
 		if (sortmerge.size() == 1)
 			break ;
 	}
 }
 
+void PmergeMe::printRes(clock_t stime, clock_t ftime)
+{
+		float	vec_time, deq_time;
+		vec_time = ((float)(ftime - stime)) / 1000000;
+		stime = clock();
+		this->sortDeq();
+		ftime = clock();
+		deq_time = ((float)(ftime - stime)) / 1000000;
+		this->printVector();
+		this->printDeq();
+		std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector : " 
+		<< std::fixed << vec_time << " us" << std::endl;
+		std::cout << "Time to process a range of " << this->_deque.size() << " elements with std::deque  : " 
+		<< std::fixed <<  deq_time << " us" << std::endl;
+}
+
+void PmergeMe::printVector()
+{
+	std::cout << "After : ";
+	for(unsigned long i = 0; i < _vector.size(); i++)
+	{
+		std::cout << " " << _vector.at(i) << " ";
+	}
+	std::cout << std::endl;
+}
+
+void PmergeMe::printDeq()
+{
+	std::cout << "After : ";
+	for(unsigned long i = 0; i < _deque.size(); i++)
+	{
+		std::cout << " " << _deque.at(i) << " ";
+	}
+	std::cout << std::endl;
+}
+
+void PmergeMe::sortDeq()
+{
+	std::deque<int>	res;
+
+	res = this->tran_cont(this->_deque);
+	this->arr_cont(this->_deque, res);
+	this->ret(this->_deque, res, this->_dequeCont);
+}
+
 template <typename T>
-void PmergeMe::_return(T &container, T &temp, T &sequence)
+T PmergeMe::tran_cont(T &container)
+{
+	int		c = 0;
+	int		c1 = container.size();
+	int		sizeOri = container.size();
+	T		temp;
+
+	while (c1 != 0 && c1 != 1)
+	{
+		if (container[c] <= container[c + 1])
+		{
+			temp.push_back(container[c + 1]);
+			container.erase(container.begin() + (c + 1));
+		}
+		else 
+		{
+			temp.push_back(container[c]);
+			container.erase(container.begin() + c);
+		}
+		c++;
+		c1 -= 2;
+	}
+	if ((sizeOri % 2 != 0))
+	{
+		temp.push_back(container[c]);
+		container.erase(container.begin() + c);
+	}
+	return (temp);
+}
+
+template <typename T>
+void PmergeMe::ret(T &container, T &temp, T &sequence)
 {
 	int	c = 0;
 
@@ -124,12 +209,12 @@ void PmergeMe::_return(T &container, T &temp, T &sequence)
 }
 
 template <typename T>
-void PmergeMe::_rearrange(T &container, T &temp)
+void PmergeMe::arr_cont(T &container, T &temp)
 {
 	int	c = 0;
 	int	end = container.size() - 1;
-	
-	while (c < end)
+
+	while (end > c)
 	{
 		if (container[end] < container[end - 1])
 		{
@@ -152,61 +237,21 @@ void PmergeMe::_rearrange(T &container, T &temp)
 	}
 }
 
-template <typename T>
-T PmergeMe::_transfer(T &container)
-{
-	int		c = 0;
-	int		size = container.size();
-	int		true_size = container.size();
-	T		temp;
-
-	while (size != 0 && size != 1)
-	{
-		if (container[c] <= container[c + 1])
-		{
-			temp.push_back(container[c + 1]);
-			container.erase(container.begin() + (c + 1));
-		}
-		else 
-		{
-			temp.push_back(container[c]);
-			container.erase(container.begin() + c);
-		}
-		c++;
-		size -= 2;
-	}
-	if ((true_size % 2 != 0))
-	{
-		temp.push_back(container[c]);
-		container.erase(container.begin() + c);
-	}
-	return (temp);
-}
-
-void PmergeMe::_sort_deque()
-{
-	std::deque<int>	temp;
-	
-	temp = this->_transfer(this->_deq);
-	this->_rearrange(this->_deq, temp);
-	this->_return(this->_deq, temp, this->_deq_sequence);
-}
-
-void PmergeMe::_sort_vector()
+void PmergeMe::sortVector()
 {
 	std::vector<int>	temp;
-	
-	temp = this->_transfer(this->_vec);
-	this->_rearrange(this->_vec, temp);
-	this->_return(this->_vec, temp, this->_vec_sequence);
+
+	temp = this->tran_cont(this->_vector);
+	this->arr_cont(this->_vector, temp);
+	this->ret(this->_vector, temp, this->_vectorCont);
 }
 
-bool PmergeMe::_already_sorted()
+bool PmergeMe::vectorSort()
 {
 	std::vector<int>::iterator it;
 
-	it = this->_vec.begin();
-	while (it != this->_vec.end() - 1)
+	it = this->_vector.begin();
+	while (it != this->_vector.end() - 1)
 	{
 		if (*it < *(it + 1))
 			it++;
@@ -214,48 +259,4 @@ bool PmergeMe::_already_sorted()
 			return (false);
 	}
 	return (true);
-}
-
-void PmergeMe::printRes(clock_t stime, clock_t ftime)
-{
-		double	vec_time, deq_time;
-		vec_time = ((double)(ftime - stime)) / 1000000;
-		stime = clock();
-		this->_sort_deque();
-		ftime = clock();
-		deq_time = ((double)(ftime - stime)) / 1000000;
-		this->printVector();
-		this->printDeq();
-		std::cout << "Time to process a range of " << this->_vec.size() << " elements with std::vector : " 
-		<< std::fixed << vec_time << " us" << std::endl;
-		std::cout << "Time to process a range of " << this->_deq.size() << " elements with std::deque  : " 
-		<< std::fixed <<  deq_time << " us" << std::endl;
-}
-
-void PmergeMe::_sort_containers()
-{
-	if (_already_sorted())
-		std::cout << "This set is already sorted" << std::endl;
-	else
-	{
-		clock_t	stime;
-		clock_t	ftime;
-		_create_sequence(this->_vec.size());
-		stime = clock();
-		this->_sort_vector();
-		ftime = clock();
-		printRes(stime, ftime);
-	}
-}
-
-PmergeMe::PmergeMe(char **argv)
-{
-	std::cout << "Before: ";
-	for (size_t i = 0; argv[i]; i++)
-	{
-		this->_vec.push_back(atoi(argv[i]));
-		this->_deq.push_back(atoi(argv[i]));
-		std::cout << " " << atoi(argv[i]) << " ";
-	}
-	std::cout << std::endl;	this->_sort_containers();
 }
