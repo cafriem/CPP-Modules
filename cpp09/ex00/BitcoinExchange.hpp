@@ -38,20 +38,20 @@ class BitcoinExchange
 		BitcoinExchange& operator=(BitcoinExchange const &rhs);
 		~BitcoinExchange();
 
-		std::string	fileParse(std::string const filename);
 		std::string getFilename(char *filename);
-		std::string	LowerBound(std::string &date);
 		void		openfile();
-		bool		checkLine(std::string str);
-		bool		checkDate(std::string str);
-		bool		dateFormat(std::string year, std::string month, std::string date);
 		bool		checkValue(std::string str);
+		bool		dateFormat(std::string year, std::string month, std::string date);
+		bool		checkDate(std::string str);
+		bool		checkLine(std::string str);
+		std::string	debug(std::string &date);
+		std::string	fileParse(std::string const filename);
 		void		calculate(std::string &rate);
 
 	class FileIssues: public std::exception
 	{
 		private:
-			std::string errorMessage;
+			std::string errorFault;
 		public:
 			FileIssues(std::string error);
 			const char *what() const throw() ;

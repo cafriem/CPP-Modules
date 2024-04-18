@@ -6,7 +6,7 @@
 /*   By: cafriem <cafriem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:01:58 by cafriem           #+#    #+#             */
-/*   Updated: 2024/04/18 13:58:41 by cafriem          ###   ########.fr       */
+/*   Updated: 2024/04/18 14:05:24 by cafriem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ BitcoinExchange::~BitcoinExchange()
 	std::cout << "BitcoinExchange Destructor called" << std::endl;
 }
 
-BitcoinExchange::FileIssues::FileIssues(std::string error) : errorMessage(error)
+BitcoinExchange::FileIssues::FileIssues(std::string error) : errorFault(error)
 {}
 
 const char* BitcoinExchange::FileIssues:: what(void) const throw()
 {
-	return (errorMessage.c_str());
+	return (errorFault.c_str());
 }
 
 BitcoinExchange::FileIssues::~FileIssues() throw()
@@ -209,7 +209,7 @@ bool BitcoinExchange::checkLine(std::string str)
 	return (true);
 }
 
-std::string BitcoinExchange::LowerBound(std::string &date)
+std::string BitcoinExchange::debug(std::string &date)
 {
 	std::stringstream stream(date);
 	std::string year, month, day, new_date;
@@ -281,7 +281,7 @@ void BitcoinExchange::calculate(std::string &data)
 				while(this->_values.find(date) == this->_values.end() && flag)
 				{
 					flag = this->checkDate(date);
-					date = this->LowerBound(date);
+					date = this->debug(date);
 				}
 				if(this->checkValue(value) && flag && this->checkLine(line))
 				{
